@@ -1,6 +1,8 @@
 {
-  "extends": ["yoctol"],
+  "parser": "babel-eslint",
+  "extends": ["yoctol", "prettier"],
   "env": {
     "node": true
-  }
+  },
+  "plugins": ["prettier"]
 }

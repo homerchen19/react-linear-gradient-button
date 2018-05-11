@@ -1,3 +1,3 @@
-import LinearGradientButton from './LinearGradientButton';
+import GradientButton from './GradientButton';
 
-export default LinearGradientButton;
+export default GradientButton;
