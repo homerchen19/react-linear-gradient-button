@@ -3,19 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { color, fontSize, borderRadius, textAlign } from 'styled-system';
 
-import { getGradientColors } from './gradients';
-
-const getLinearGradient = name => {
-  const [firstColor, ...elseColors] = getGradientColors(name);
-  const elseColorsLength = elseColors.length;
-  let str = '';
-
-  for (let i = 0; i < elseColorsLength; i += 1) {
-    str = `${str}, ${elseColors[i]} ${100 / elseColorsLength * (i + 1)}%`;
-  }
-
-  return `${firstColor} 0% ${str}`;
-};
+import { getLinearGradient, getPadding } from './utils';
 
 const GradientBackground = styled.button`
   position: relative;
@@ -57,7 +45,7 @@ GradientBackground.defaultProps = {
 const Inner = styled.div`
   width: 100%;
   height: 100%;
-  padding: ${props => props.padding}px;
+  padding: ${props => getPadding(props.padding)};
   outline: 0;
   background: #fff;
   transition: all 0.2s ease-in-out;
@@ -71,7 +59,11 @@ const Inner = styled.div`
 `;
 
 Inner.propTypes = {
-  padding: PropTypes.number.isRequired,
+  padding: PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.string,
+    PropTypes.array,
+  ]).isRequired,
   ...borderRadius.propTypes,
 };
 
@@ -100,7 +92,14 @@ GradientButton.propTypes = {
   borderWith: PropTypes.number,
   content: PropTypes.oneOfType([PropTypes.node, PropTypes.string]).isRequired,
   gradient: PropTypes.string,
-  padding: PropTypes.number,
+  padding: PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.string,
+    PropTypes.array,
+  ]),
+  ...color.propTypes,
+  ...fontSize.propTypes,
+  ...textAlign.propTypes,
 };
 
 GradientButton.defaultProps = {
