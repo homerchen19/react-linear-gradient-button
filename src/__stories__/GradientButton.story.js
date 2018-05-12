@@ -2,7 +2,13 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import centered from '@storybook/addon-centered';
 import backgrounds from '@storybook/addon-backgrounds';
-import { withKnobs, text, number, array } from '@storybook/addon-knobs/react';
+import {
+  withKnobs,
+  text,
+  number,
+  array,
+  object,
+} from '@storybook/addon-knobs/react';
 import styled from 'styled-components';
 
 import GradientButton from '../';
@@ -31,7 +37,7 @@ storiesOf('GradientButton', module)
   ))
   .add('Playground', () => (
     <Container style={{ flexDirection: 'column' }}>
-      <h3>Check {`"KNOBS"`} below</h3>
+      <h3>Update props in {`"KNOBS"`} section below</h3>
       <GradientButton
         content={text('content => STRING', 'BUTTON')}
         theme={text('theme => STRING', 'Vanusa')}
@@ -42,6 +48,12 @@ storiesOf('GradientButton', module)
         background={text('background => STRING', '#fff')}
         color={text('color => STRING', '#ae3560')}
         fontSize={number('fontSize => NUMBER', 16)}
+        transition={object('transition => OBJECT', {
+          property: 'all',
+          duration: 0.2,
+          timingFunction: 'ease-in-out',
+          delay: 0,
+        })}
       />
     </Container>
   ));

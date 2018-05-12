@@ -16,7 +16,6 @@ const GradientBackground = styled.button`
     to ${props => props.direction},
     ${props => getLinearGradient(props.theme, props.gradient)}
   );
-  transition: all 0.2s ease-in-out;
   cursor: pointer;
 
   ${borderRadius};
@@ -46,7 +45,10 @@ const Inner = styled.div`
   height: 100%;
   padding: ${props => getPadding(props.padding)};
   outline: 0;
-  transition: all 0.2s ease-in-out;
+  transition: ${({ transition }) =>
+    `${transition.property} ${transition.duration}s ${
+      transition.timingFunction
+    } ${transition.delay}s`};
 
   &:hover {
     background: transparent;
@@ -63,6 +65,9 @@ Inner.propTypes = {
     PropTypes.string,
     PropTypes.array,
   ]).isRequired,
+  transition: PropTypes.objectOf(
+    PropTypes.oneOfType([PropTypes.number, PropTypes.string])
+  ).isRequired,
   ...borderRadius.propTypes,
 };
 
@@ -75,20 +80,22 @@ const GradientButton = ({
   gradient,
   padding,
   theme,
+  transition,
   ...props
 }) => (
   <GradientBackground
-    gradient={gradient}
-    direction={direction}
-    theme={theme}
     borderRadius={_borderRadius}
     borderWith={borderWith}
+    direction={direction}
+    gradient={gradient}
+    theme={theme}
     {...props}
   >
     <Inner
       bg={_bg}
       borderRadius={_borderRadius - (borderWith + 1)}
       padding={padding}
+      transition={transition}
     >
       {content}
     </Inner>
@@ -108,6 +115,9 @@ GradientButton.propTypes = {
     PropTypes.array,
   ]),
   theme: PropTypes.string,
+  transition: PropTypes.objectOf(
+    PropTypes.oneOfType([PropTypes.number, PropTypes.string])
+  ),
   ...color.propTypes,
   ...fontSize.propTypes,
 };
@@ -118,8 +128,14 @@ GradientButton.defaultProps = {
   borderWith: 2,
   direction: 'right',
   gradient: null,
-  theme: 'Vanusa',
   padding: 10,
+  theme: 'Vanusa',
+  transition: {
+    property: 'all',
+    duration: 0.2,
+    timingFunction: 'ease-in-out',
+    delay: 0,
+  },
 };
 
 export default GradientButton;
