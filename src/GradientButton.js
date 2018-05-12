@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { color, fontSize, borderRadius, textAlign } from 'styled-system';
+import { color, fontSize, borderRadius } from 'styled-system';
 
 import { getLinearGradient, getPadding } from './utils';
 
@@ -22,7 +22,6 @@ const GradientBackground = styled.button`
   ${borderRadius};
   ${color};
   ${fontSize};
-  ${textAlign};
 
   text-decoration: none;
 `;
@@ -33,13 +32,11 @@ GradientBackground.propTypes = {
   ...borderRadius.propTypes,
   ...color.propTypes,
   ...fontSize.propTypes,
-  ...textAlign.propTypes,
 };
 
 GradientBackground.defaultProps = {
-  color: '#000',
+  color: '#ae3560',
   fontSize: 16,
-  textAlign: 'center',
 };
 
 const Inner = styled.div`
@@ -47,7 +44,6 @@ const Inner = styled.div`
   height: 100%;
   padding: ${props => getPadding(props.padding)};
   outline: 0;
-  background: #fff;
   transition: all 0.2s ease-in-out;
 
   &:hover {
@@ -56,6 +52,7 @@ const Inner = styled.div`
   }
 
   ${borderRadius};
+  ${color};
 `;
 
 Inner.propTypes = {
@@ -68,6 +65,7 @@ Inner.propTypes = {
 };
 
 const GradientButton = ({
+  background: _bg,
   borderRadius: _borderRadius,
   borderWith,
   content,
@@ -81,13 +79,18 @@ const GradientButton = ({
     borderWith={borderWith}
     {...props}
   >
-    <Inner borderRadius={_borderRadius - (borderWith + 1)} padding={padding}>
+    <Inner
+      bg={_bg}
+      borderRadius={_borderRadius - (borderWith + 1)}
+      padding={padding}
+    >
       {content}
     </Inner>
   </GradientBackground>
 );
 
 GradientButton.propTypes = {
+  background: PropTypes.string,
   borderRadius: PropTypes.number,
   borderWith: PropTypes.number,
   content: PropTypes.oneOfType([PropTypes.node, PropTypes.string]).isRequired,
@@ -99,10 +102,10 @@ GradientButton.propTypes = {
   ]),
   ...color.propTypes,
   ...fontSize.propTypes,
-  ...textAlign.propTypes,
 };
 
 GradientButton.defaultProps = {
+  background: '#fff',
   borderRadius: 20,
   borderWith: 2,
   gradient: 'Vanusa',

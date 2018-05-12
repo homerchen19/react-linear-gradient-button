@@ -1184,8 +1184,18 @@ const gradients = [
   },
 ];
 
-const getGradientColors = name =>
-  gradients.find(gradient => gradient.name.toLowerCase() === name.toLowerCase())
-    .colors;
+const getGradientColors = name => {
+  let _gradient = gradients.find(
+    gradient => gradient.name.toLowerCase() === name.toLowerCase()
+  );
+
+  if (!_gradient) {
+    _gradient = {
+      colors: ['#fff', '#fff'],
+    };
+  }
+
+  return _gradient.colors;
+};
 
 export { getGradientColors };
