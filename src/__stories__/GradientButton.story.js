@@ -35,6 +35,7 @@ storiesOf('GradientButton', module)
       <GradientButton
         content={text('content => STRING', 'BUTTON')}
         theme={text('theme => STRING', 'Vanusa')}
+        direction={text('direction => STRING', 'right')}
         padding={array('padding => ARRAY', [15, 30])}
         borderRadius={number('borderRadius => NUMBER', 20)}
         borderWith={number('borderWith => NUMBER', 2)}
