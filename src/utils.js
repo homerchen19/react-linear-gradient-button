@@ -1,15 +1,14 @@
 import { getGradientColors } from './gradients';
 
-const getLinearGradient = name => {
-  const [firstColor, ...elseColors] = getGradientColors(name);
-  const elseColorsLength = elseColors.length;
-  let str = '';
+const getLinearGradient = (theme, cutomizedGradient) => {
+  const [firstColor, ...elseColors] =
+    cutomizedGradient || getGradientColors(theme);
 
-  for (let i = 0; i < elseColorsLength; i += 1) {
-    str = `${str}, ${elseColors[i]} ${100 / elseColorsLength * (i + 1)}%`;
-  }
+  const str = elseColors
+    .map((color, index) => `${color} ${100 / elseColors.length * (index + 1)}%`)
+    .join(', ');
 
-  return `${firstColor} 0% ${str}`;
+  return `${firstColor} 0%, ${str}`;
 };
 
 const getPadding = prop => {

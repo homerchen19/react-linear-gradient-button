@@ -23,12 +23,18 @@ storiesOf('GradientButton', module)
     ])
   )
   .add('Default', () => <GradientButton content={text('content', 'BUTTON')} />)
+  .add('Cutomized gradient', () => (
+    <GradientButton
+      gradient={array('gradient => ARRAY', ['#f00b47', '#0f6bb6'])}
+      content={text('content', 'BUTTON')}
+    />
+  ))
   .add('Playground', () => (
     <Container style={{ flexDirection: 'column' }}>
       <h3>Check {`"KNOBS"`} below</h3>
       <GradientButton
         content={text('content => STRING', 'BUTTON')}
-        gradient={text('gradient => STRING', 'Vanusa')}
+        theme={text('theme => STRING', 'Vanusa')}
         padding={array('padding => ARRAY', [15, 30])}
         borderRadius={number('borderRadius => NUMBER', 20)}
         borderWith={number('borderWith => NUMBER', 2)}

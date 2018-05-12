@@ -14,7 +14,7 @@ const GradientBackground = styled.button`
   outline: 0;
   background-image: linear-gradient(
     to right,
-    ${props => getLinearGradient(props.gradient)}
+    ${props => getLinearGradient(props.theme, props.gradient)}
   );
   transition: all 0.2s ease-in-out;
   cursor: pointer;
@@ -28,7 +28,8 @@ const GradientBackground = styled.button`
 
 GradientBackground.propTypes = {
   borderWith: PropTypes.number.isRequired,
-  gradient: PropTypes.string.isRequired,
+  gradient: PropTypes.arrayOf(PropTypes.string),
+  theme: PropTypes.string.isRequired,
   ...borderRadius.propTypes,
   ...color.propTypes,
   ...fontSize.propTypes,
@@ -71,10 +72,12 @@ const GradientButton = ({
   content,
   gradient,
   padding,
+  theme,
   ...props
 }) => (
   <GradientBackground
     gradient={gradient}
+    theme={theme}
     borderRadius={_borderRadius}
     borderWith={borderWith}
     {...props}
@@ -94,12 +97,13 @@ GradientButton.propTypes = {
   borderRadius: PropTypes.number,
   borderWith: PropTypes.number,
   content: PropTypes.oneOfType([PropTypes.node, PropTypes.string]).isRequired,
-  gradient: PropTypes.string,
+  gradient: PropTypes.arrayOf(PropTypes.string),
   padding: PropTypes.oneOfType([
     PropTypes.number,
     PropTypes.string,
     PropTypes.array,
   ]),
+  theme: PropTypes.string,
   ...color.propTypes,
   ...fontSize.propTypes,
 };
@@ -108,7 +112,8 @@ GradientButton.defaultProps = {
   background: '#fff',
   borderRadius: 20,
   borderWith: 2,
-  gradient: 'Vanusa',
+  gradient: null,
+  theme: 'Vanusa',
   padding: 10,
 };
 
