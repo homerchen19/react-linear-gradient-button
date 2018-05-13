@@ -30,7 +30,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import GradientButton from 'react-linear-gradient-button';
 
-const Basic extends components {
+const Basic extends Component {
   render() {
     return <GradientButton content="BUTTON" />;
   }
