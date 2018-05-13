@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import { color, fontSize, borderRadius } from 'styled-system';
+import { prop, ifProp } from 'styled-tools';
 
 import { getLinearGradient, getPadding } from './utils';
 
@@ -13,25 +14,22 @@ const GradientBackground = styled.button`
   border: 0;
   outline: 0;
   background-image: linear-gradient(
-    ${({ angle }) => {
-      if (angle.includes('deg')) {
-        return angle;
-      }
-
-      return `to ${angle}`;
-    }},
+    ${ifProp(
+      ({ angle }) => angle.includes('deg'),
+      prop('angle'),
+      props => `to ${prop('angle')(props)}`
+    )},
     ${props => getLinearGradient(props.theme, props.gradient)}
   );
   cursor: pointer;
 
-  ${props => {
-    if (props.disabled) {
-      return css`
-        cursor: not-allowed;
-        opacity: 0.65;
-      `;
-    }
-  }};
+  ${ifProp(
+    'disabled',
+    css`
+      cursor: not-allowed;
+      opacity: 0.65;
+    `
+  )};
 
   ${borderRadius};
   ${color};
@@ -61,19 +59,18 @@ const Inner = styled.div`
   padding: ${props => getPadding(props.padding)};
   outline: 0;
 
-  ${({ disabled, transition }) => {
-    if (!disabled) {
-      return css`
-        transition: ${transition.property} ${transition.duration}s
-          ${transition.timingFunction} ${transition.delay}s;
+  ${ifProp(
+    { disabled: false },
+    css`
+      transition: ${prop('transition.property')} ${prop('transition.duration')}s
+        ${prop('transition.timingFunction')} ${prop('transition.delay')}s;
 
-        &:hover {
-          background: transparent;
-          color: #fff;
-        }
-      `;
-    }
-  }};
+      &:hover {
+        background: transparent;
+        color: #fff;
+      }
+    `
+  )};
 
   ${borderRadius};
   ${color};
