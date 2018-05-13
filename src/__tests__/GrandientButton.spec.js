@@ -38,7 +38,7 @@ describe('GradientButton', () => {
         angle="30deg"
         padding={[10, 20]}
         borderRadius={10}
-        borderWith={3}
+        borderWidth={3}
         color="#123456"
         fontSize={12}
       >
