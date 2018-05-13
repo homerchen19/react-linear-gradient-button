@@ -8,7 +8,7 @@
   "files": ["lib"],
   "scripts": {
     "build":
-      "npm run clean && cross-env NODE_ENV=production babel src -d lib --ignore **/__stories__",
+      "npm run clean && cross-env NODE_ENV=production babel src -d lib --ignore **/__tests__,**/__stories__",
     "clean": "rimraf lib",
     "precommit": "lint-staged",
     "deploy:storybook": "storybook-to-ghpages",
@@ -62,6 +62,7 @@
     "eslint-plugin-react": "^7.7.0",
     "husky": "^0.14.3",
     "jest": "^22.4.3",
+    "jest-styled-components": "^5.0.1",
     "lint-staged": "^7.1.0",
     "prettier": "^1.12.1",
     "prettier-package-json": "^1.6.0",
@@ -83,10 +84,12 @@
   ],
   "jest": {
     "collectCoverageFrom": ["src/**/*.js", "!src/**/__stories__/*"],
-    "testPathIgnorePatterns": ["/node_modules/", "<rootDir>/lib"]
+    "testPathIgnorePatterns": ["/node_modules/", "<rootDir>/lib"],
+    "resetModules": true,
+    "resetMocks": true
   },
   "lint-staged": {
-    "*.js": ["eslint --fix", "npm run lint:css", "git add"],
+    "*.js$": ["eslint --fix", "npm run lint:css", "git add"],
     "*.{json,md}": ["prettier --write", "git add"],
     "package.json": [
       "prettier-package-json --write",

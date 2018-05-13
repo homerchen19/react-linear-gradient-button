@@ -15,8 +15,21 @@ const getPadding = prop => {
   if (typeof prop === 'string' || typeof prop === 'number') {
     return `${prop}px`;
   } else if (Array.isArray(prop)) {
-    return prop.map(p => `${p}px`).join(' ');
+    if (prop.length > 4) {
+      console.warn(
+        'Warning: padding property should have maximum four values.'
+      );
+    }
+
+    return prop
+      .slice(0, 4)
+      .map(p => `${p}px`)
+      .join(' ');
   }
+
+  console.error(
+    'Warning: Type of padding property should be either "String", "Number" or "Array"'
+  );
 };
 
 export { getLinearGradient, getPadding };

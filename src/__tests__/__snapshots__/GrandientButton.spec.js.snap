@@ -1,0 +1,103 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`GradientButton should render correctly with default style 1`] = `
+.c0 {
+  position: relative;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  box-sizing: border-box;
+  padding: 2px;
+  border: 0;
+  outline: 0;
+  background-image: linear-gradient( to right,#DA4453 0%,#89216B 100% );
+  cursor: pointer;
+  border-radius: 20px;
+  color: #ae3560;
+  font-size: 16px;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+
+.c1 {
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+  outline: 0;
+  -webkit-transition: all 0.2s ease-in-out 0s;
+  transition: all 0.2s ease-in-out 0s;
+  border-radius: 17px;
+  background-color: #fff;
+}
+
+.c1:hover {
+  background: transparent;
+  color: #fff;
+}
+
+<button
+  className="c0"
+  color="#ae3560"
+  disabled={false}
+  fontSize={16}
+>
+  <div
+    className="c1"
+    disabled={false}
+  >
+    test button
+  </div>
+</button>
+`;
+
+exports[`GradientButton should render correctly with fancy props 1`] = `
+.c0 {
+  position: relative;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  box-sizing: border-box;
+  padding: 3px;
+  border: 0;
+  outline: 0;
+  background-image: linear-gradient( 30deg,#f00b47 0%,#0f6bb6 100% );
+  cursor: pointer;
+  border-radius: 10px;
+  color: #123456;
+  font-size: 12px;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+
+.c1 {
+  width: 100%;
+  height: 100%;
+  padding: 10px 20px;
+  outline: 0;
+  -webkit-transition: all 0.2s ease-in-out 0s;
+  transition: all 0.2s ease-in-out 0s;
+  border-radius: 6px;
+  background-color: #fff;
+}
+
+.c1:hover {
+  background: transparent;
+  color: #fff;
+}
+
+<button
+  className="c0"
+  color="#123456"
+  disabled={false}
+  fontSize={12}
+>
+  <div
+    className="c1"
+    disabled={false}
+  >
+    test button
+  </div>
+</button>
+`;
