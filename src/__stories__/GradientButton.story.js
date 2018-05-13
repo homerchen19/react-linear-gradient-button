@@ -8,6 +8,7 @@ import {
   number,
   array,
   object,
+  boolean,
 } from '@storybook/addon-knobs/react';
 import styled from 'styled-components';
 
@@ -41,7 +42,7 @@ storiesOf('GradientButton', module)
       <GradientButton
         content={text('content => STRING', 'BUTTON')}
         theme={text('theme => STRING', 'Vanusa')}
-        direction={text('direction => STRING', 'right')}
+        angle={text('angle => STRING', 'right')}
         padding={array('padding => ARRAY', [15, 30])}
         borderRadius={number('borderRadius => NUMBER', 20)}
         borderWith={number('borderWith => NUMBER', 2)}
@@ -54,6 +55,7 @@ storiesOf('GradientButton', module)
           timingFunction: 'ease-in-out',
           delay: 0,
         })}
+        disabled={boolean('disabled => BOOL', false)}
       />
     </Container>
   ));

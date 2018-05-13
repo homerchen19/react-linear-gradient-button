@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { color, fontSize, borderRadius } from 'styled-system';
 
 import { getLinearGradient, getPadding } from './utils';
@@ -13,10 +13,25 @@ const GradientBackground = styled.button`
   border: 0;
   outline: 0;
   background-image: linear-gradient(
-    to ${props => props.direction},
+    ${({ angle }) => {
+      if (angle.includes('deg')) {
+        return angle;
+      }
+
+      return `to ${angle}`;
+    }},
     ${props => getLinearGradient(props.theme, props.gradient)}
   );
   cursor: pointer;
+
+  ${props => {
+    if (props.disabled) {
+      return css`
+        cursor: not-allowed;
+        opacity: 0.65;
+      `;
+    }
+  }};
 
   ${borderRadius};
   ${color};
@@ -26,8 +41,8 @@ const GradientBackground = styled.button`
 `;
 
 GradientBackground.propTypes = {
+  angle: PropTypes.string.isRequired,
   borderWith: PropTypes.number.isRequired,
-  direction: PropTypes.string.isRequired,
   gradient: PropTypes.arrayOf(PropTypes.string),
   theme: PropTypes.string.isRequired,
   ...borderRadius.propTypes,
@@ -45,15 +60,20 @@ const Inner = styled.div`
   height: 100%;
   padding: ${props => getPadding(props.padding)};
   outline: 0;
-  transition: ${({ transition }) =>
-    `${transition.property} ${transition.duration}s ${
-      transition.timingFunction
-    } ${transition.delay}s`};
 
-  &:hover {
-    background: transparent;
-    color: #fff;
-  }
+  ${({ disabled, transition }) => {
+    if (!disabled) {
+      return css`
+        transition: ${transition.property} ${transition.duration}s
+          ${transition.timingFunction} ${transition.delay}s;
+
+        &:hover {
+          background: transparent;
+          color: #fff;
+        }
+      `;
+    }
+  }};
 
   ${borderRadius};
   ${color};
@@ -72,11 +92,12 @@ Inner.propTypes = {
 };
 
 const GradientButton = ({
+  angle,
   background: _bg,
   borderRadius: _borderRadius,
   borderWith,
   content,
-  direction,
+  disabled,
   gradient,
   padding,
   theme,
@@ -86,7 +107,8 @@ const GradientButton = ({
   <GradientBackground
     borderRadius={_borderRadius}
     borderWith={borderWith}
-    direction={direction}
+    angle={angle}
+    disabled={disabled}
     gradient={gradient}
     theme={theme}
     {...props}
@@ -94,6 +116,7 @@ const GradientButton = ({
     <Inner
       bg={_bg}
       borderRadius={_borderRadius - (borderWith + 1)}
+      disabled={disabled}
       padding={padding}
       transition={transition}
     >
@@ -103,11 +126,12 @@ const GradientButton = ({
 );
 
 GradientButton.propTypes = {
+  angle: PropTypes.string,
   background: PropTypes.string,
   borderRadius: PropTypes.number,
   borderWith: PropTypes.number,
   content: PropTypes.oneOfType([PropTypes.node, PropTypes.string]).isRequired,
-  direction: PropTypes.string,
+  disabled: PropTypes.bool,
   gradient: PropTypes.arrayOf(PropTypes.string),
   padding: PropTypes.oneOfType([
     PropTypes.number,
@@ -123,10 +147,11 @@ GradientButton.propTypes = {
 };
 
 GradientButton.defaultProps = {
+  angle: 'right',
   background: '#fff',
   borderRadius: 20,
   borderWith: 2,
-  direction: 'right',
+  disabled: false,
   gradient: null,
   padding: 10,
   theme: 'Vanusa',
