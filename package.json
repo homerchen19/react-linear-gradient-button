@@ -3,6 +3,15 @@
   "description": "React linear gradient button component.",
   "license": "MIT",
   "author": "xxhomey19",
+  "homepage":
+    "https://github.com/xxhomey19/react-linear-gradient-button#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xxhomey19/react-linear-gradient-button.git"
+  },
+  "bugs": {
+    "url": "https://github.com/xxhomey19/react-linear-gradient-button/issues"
+  },
   "version": "0.0.1",
   "main": "index.js",
   "files": ["lib"],

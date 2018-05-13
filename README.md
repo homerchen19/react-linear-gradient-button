@@ -5,6 +5,7 @@
   <p align="center">React linear gradient button component</p>
 </p>
 <p align="center">
+  <a target="_blank" href="https://npmjs.org/package/react-linear-gradient-button" title="NPM version"><img src="https://img.shields.io/npm/v/react-linear-gradient-button.svg"></a>
   <a target="_blank" href="https://travis-ci.com/xxhomey19/react-linear-gradient-button" title="Build Status"><img src="https://travis-ci.com/xxhomey19/react-linear-gradient-button.svg?branch=master"></a>
   <a target="_blank" href="https://opensource.org/licenses/MIT" title="License: MIT">
     <img src="https://img.shields.io/badge/License-MIT-blue.svg">
