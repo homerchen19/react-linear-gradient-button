@@ -12,7 +12,7 @@
   "bugs": {
     "url": "https://github.com/xxhomey19/react-linear-gradient-button/issues"
   },
-  "version": "0.0.1",
+  "version": "1.0.0",
   "main": "index.js",
   "files": ["lib"],
   "scripts": {
