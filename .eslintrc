@@ -2,7 +2,9 @@
   "parser": "babel-eslint",
   "extends": ["yoctol", "prettier"],
   "env": {
-    "node": true
+    "browser": true,
+    "node": true,
+    "jest": true
   },
   "plugins": ["prettier"]
 }
