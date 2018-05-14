@@ -7,7 +7,7 @@ import GradientButton from '../GradientButton';
 describe('GradientButton', () => {
   it('should render correctly with default style', () => {
     const tree = TestRenderer.create(
-      <GradientButton content="test button" />
+      <GradientButton>test button</GradientButton>
     ).toJSON();
 
     expect(tree).toMatchSnapshot();
@@ -24,7 +24,7 @@ describe('GradientButton', () => {
 
   it('should render correctly with disabled props', () => {
     const tree = TestRenderer.create(
-      <GradientButton disabled content="test button" />
+      <GradientButton disabled>test button</GradientButton>
     ).toJSON();
 
     expect(tree).toHaveStyleRule('cursor', 'not-allowed');
@@ -34,7 +34,6 @@ describe('GradientButton', () => {
   it('should render correctly with fancy props', () => {
     const tree = TestRenderer.create(
       <GradientButton
-        content="test button"
         gradient={['#f00b47', '#0f6bb6']}
         angle="30deg"
         padding={[10, 20]}
@@ -42,7 +41,9 @@ describe('GradientButton', () => {
         borderWith={3}
         color="#123456"
         fontSize={12}
-      />
+      >
+        test button
+      </GradientButton>
     ).toJSON();
 
     expect(tree).toMatchSnapshot();

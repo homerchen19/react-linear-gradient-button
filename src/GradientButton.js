@@ -93,7 +93,7 @@ const GradientButton = ({
   background: _bg,
   borderRadius: _borderRadius,
   borderWith,
-  content,
+  children,
   disabled,
   gradient,
   padding,
@@ -117,7 +117,7 @@ const GradientButton = ({
       padding={padding}
       transition={transition}
     >
-      {content}
+      {children}
     </Inner>
   </GradientBackground>
 );
@@ -127,7 +127,7 @@ GradientButton.propTypes = {
   background: PropTypes.string,
   borderRadius: PropTypes.number,
   borderWith: PropTypes.number,
-  content: PropTypes.oneOfType([PropTypes.node, PropTypes.string]).isRequired,
+  children: PropTypes.oneOfType([PropTypes.node, PropTypes.string]).isRequired,
   disabled: PropTypes.bool,
   gradient: PropTypes.arrayOf(PropTypes.string),
   padding: PropTypes.oneOfType([
