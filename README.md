@@ -32,7 +32,7 @@ import GradientButton from 'react-linear-gradient-button';
 
 class Basic extends Component {
   render() {
-    return <GradientButton content="BUTTON" />;
+    return <GradientButton>BUTTON</GradientButton>;
   }
 }
 
@@ -48,7 +48,7 @@ ReactDOM.render(<Basic />, document.getElementById('root'));
 
 | Props                     |                          Type                          |     Default     | Description                                                                                                                                                                                                        |
 | :------------------------ | :----------------------------------------------------: | :-------------: | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| content                   |                  `String` \|\| `Node`                  |  **Required**   | Content of the button.                                                                                                                                                                                             |
+| children                  |                  `String` \|\| `Node`                  |  **Required**   | Content of the button.                                                                                                                                                                                             |
 | theme                     |                        `String`                        |   `"Vanusa"`    | Gradient theme from [uigradients](https://uigradients.com/).                                                                                                                                                       |
 | disabled                  |                         `Bool`                         |     `false`     | Should render a disabled button.                                                                                                                                                                                   |
 | gradient                  |                       `[String]`                       |     `null`      | Array of colors (e.g., `['#f00b47', '#0f6bb6']`, `[rgba(255,0,0,0), rgba(255,0,0,1)]`).<br />**NOTE**: this props has higher level then `theme`.                                                                   |

@@ -9,7 +9,7 @@ describe('index', () => {
     const node = document.createElement('div');
 
     expect(() => {
-      render(<GradientButton content="client-rendering" />, node);
+      render(<GradientButton>client-rendering</GradientButton>, node);
     }).not.toThrow();
   });
 
@@ -17,7 +17,7 @@ describe('index', () => {
     global.window = undefined;
 
     expect(() =>
-      renderToString(<GradientButton content="server-rendering" />)
+      renderToString(<GradientButton>server-rendering</GradientButton>)
     ).not.toThrow();
   });
 });
