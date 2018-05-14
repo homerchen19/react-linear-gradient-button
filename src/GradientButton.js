@@ -10,7 +10,7 @@ const GradientBackground = styled.button`
   position: relative;
   display: flex;
   box-sizing: border-box;
-  padding: ${props => props.borderWith}px;
+  padding: ${props => props.borderWidth}px;
   border: 0;
   outline: 0;
   background-image: linear-gradient(
@@ -40,7 +40,7 @@ const GradientBackground = styled.button`
 
 GradientBackground.propTypes = {
   angle: PropTypes.string.isRequired,
-  borderWith: PropTypes.number.isRequired,
+  borderWidth: PropTypes.number.isRequired,
   gradient: PropTypes.arrayOf(PropTypes.string),
   theme: PropTypes.string.isRequired,
   ...borderRadius.propTypes,
@@ -92,7 +92,7 @@ const GradientButton = ({
   angle,
   background: _bg,
   borderRadius: _borderRadius,
-  borderWith,
+  borderWidth,
   children,
   disabled,
   gradient,
@@ -103,7 +103,7 @@ const GradientButton = ({
 }) => (
   <GradientBackground
     borderRadius={_borderRadius}
-    borderWith={borderWith}
+    borderWidth={borderWidth}
     angle={angle}
     disabled={disabled}
     gradient={gradient}
@@ -112,7 +112,7 @@ const GradientButton = ({
   >
     <Inner
       bg={_bg}
-      borderRadius={_borderRadius - (borderWith + 1)}
+      borderRadius={_borderRadius - (borderWidth + 1)}
       disabled={disabled}
       padding={padding}
       transition={transition}
@@ -126,7 +126,7 @@ GradientButton.propTypes = {
   angle: PropTypes.string,
   background: PropTypes.string,
   borderRadius: PropTypes.number,
-  borderWith: PropTypes.number,
+  borderWidth: PropTypes.number,
   children: PropTypes.oneOfType([PropTypes.node, PropTypes.string]).isRequired,
   disabled: PropTypes.bool,
   gradient: PropTypes.arrayOf(PropTypes.string),
@@ -147,7 +147,7 @@ GradientButton.defaultProps = {
   angle: 'right',
   background: '#fff',
   borderRadius: 20,
-  borderWith: 2,
+  borderWidth: 2,
   disabled: false,
   gradient: null,
   padding: 10,
