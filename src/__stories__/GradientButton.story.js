@@ -12,6 +12,7 @@ import {
   object,
   boolean,
 } from '@storybook/addon-knobs/react';
+import { action } from '@storybook/addon-actions';
 import styled from 'styled-components';
 
 import GradientButton from '../';
@@ -32,10 +33,14 @@ storiesOf('GradientButton', module)
     ])
   )
   .add('Default', () => (
-    <GradientButton children={text('children', 'BUTTON')} />
+    <GradientButton
+      onClick={action('button-click')}
+      children={text('children', 'BUTTON')}
+    />
   ))
   .add('Cutomized gradient', () => (
     <GradientButton
+      onClick={action('button-click')}
       gradient={array('gradient => ARRAY', ['#f00b47', '#0f6bb6'])}
       children={text('children => STRING', 'BUTTON')}
     />
@@ -44,6 +49,7 @@ storiesOf('GradientButton', module)
     <Container style={{ flexDirection: 'column' }}>
       <h3>Update props in {`"KNOBS"`} section below</h3>
       <GradientButton
+        onClick={action('button-click')}
         children={text('children => STRING', 'BUTTON')}
         theme={text('theme => STRING', 'Vanusa')}
         angle={text('angle => STRING', 'right')}
