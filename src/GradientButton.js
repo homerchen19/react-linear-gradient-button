@@ -88,6 +88,7 @@ Inner.propTypes = {
     PropTypes.oneOfType([PropTypes.number, PropTypes.string])
   ).isRequired,
   ...borderRadius.propTypes,
+  ...color.propTypes,
 };
 
 const GradientButton = ({ children, ...props }) => (

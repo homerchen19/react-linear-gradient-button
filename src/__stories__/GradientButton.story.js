@@ -1,3 +1,5 @@
+/* eslint-disable react/no-children-prop */
+
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import centered from '@storybook/addon-centered';
@@ -29,18 +31,20 @@ storiesOf('GradientButton', module)
       { name: 'gray', value: '#e0e0e0', default: true },
     ])
   )
-  .add('Default', () => <GradientButton content={text('content', 'BUTTON')} />)
+  .add('Default', () => (
+    <GradientButton children={text('children', 'BUTTON')} />
+  ))
   .add('Cutomized gradient', () => (
     <GradientButton
       gradient={array('gradient => ARRAY', ['#f00b47', '#0f6bb6'])}
-      content={text('content', 'BUTTON')}
+      children={text('children => STRING', 'BUTTON')}
     />
   ))
   .add('Playground', () => (
     <Container style={{ flexDirection: 'column' }}>
       <h3>Update props in {`"KNOBS"`} section below</h3>
       <GradientButton
-        content={text('content => STRING', 'BUTTON')}
+        children={text('children => STRING', 'BUTTON')}
         theme={text('theme => STRING', 'Vanusa')}
         angle={text('angle => STRING', 'right')}
         padding={array('padding => ARRAY', [15, 30])}

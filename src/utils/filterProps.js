@@ -172,15 +172,17 @@ const DOMProps = [
   'onTransitionEnd',
 ];
 
-const isFn = val => Boolean(val) && typeof val === 'function';
-
 const arrayToObject = array =>
-  array.reduce((result, prop) => {
-    // eslint-disable-next-line no-param-reassign
-    result[prop] = prop;
+  R.reduce(
+    (result, prop) => {
+      // eslint-disable-next-line no-param-reassign
+      result[prop] = prop;
 
-    return result;
-  }, {});
+      return result;
+    },
+    {},
+    array
+  );
 
 const DOMPropsObj = arrayToObject(DOMProps);
 
@@ -192,16 +194,14 @@ export default function filterProps({
   const originalProps = R.clone(props);
   const finalProps = {};
 
-  if (Array.isArray(allowedProps)) {
+  if (R.type(allowedProps) === 'Array') {
     // eslint-disable-next-line no-param-reassign
     allowedProps = arrayToObject(allowedProps);
   }
 
-  if (mapProps && typeof mapProps === 'object') {
-    Object.keys(mapProps).forEach(key => {
-      const fn = mapProps[key];
-
-      if (isFn(fn)) {
+  if (mapProps && R.type(mapProps) === 'Object') {
+    R.forEachObjIndexed((fn, key) => {
+      if (R.type(fn) === 'Function') {
         const { key: newKey, value: newValue } = fn({
           key,
           value: originalProps[key],
@@ -213,20 +213,20 @@ export default function filterProps({
           delete originalProps[key];
         }
       }
-    });
+    }, mapProps);
   }
 
-  Object.keys(originalProps).forEach(prop => {
-    if (withDOMProps && DOMPropsObj[prop]) {
-      finalProps[prop] = originalProps[prop];
-    } else if (allowedProps[prop]) {
-      if (isFn(allowedProps[prop])) {
-        finalProps[prop] = allowedProps[prop];
+  R.forEachObjIndexed((value, key) => {
+    if (withDOMProps && DOMPropsObj[key]) {
+      finalProps[key] = value;
+    } else if (allowedProps[key]) {
+      if (R.type(allowedProps[key]) === 'Function') {
+        finalProps[key] = allowedProps[key];
       } else {
-        finalProps[prop] = originalProps[prop];
+        finalProps[key] = value;
       }
     }
-  });
+  }, originalProps);
 
   return finalProps;
 }
