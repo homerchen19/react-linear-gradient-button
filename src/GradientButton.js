@@ -4,13 +4,13 @@ import styled, { css } from 'styled-components';
 import { color, fontSize, borderRadius } from 'styled-system';
 import { prop, ifProp } from 'styled-tools';
 
-import { getLinearGradient, getPadding } from './utils';
+import { getLinearGradient, getPadding, filterProps } from './utils';
 
 const GradientBackground = styled.button`
   position: relative;
   display: flex;
   box-sizing: border-box;
-  padding: ${props => props.borderWidth}px;
+  padding: ${prop('borderWidth')}px;
   border: 0;
   outline: 0;
   background-image: linear-gradient(
@@ -41,6 +41,7 @@ const GradientBackground = styled.button`
 GradientBackground.propTypes = {
   angle: PropTypes.string.isRequired,
   borderWidth: PropTypes.number.isRequired,
+  disabled: PropTypes.bool.isRequired,
   gradient: PropTypes.arrayOf(PropTypes.string),
   theme: PropTypes.string.isRequired,
   ...borderRadius.propTypes,
@@ -77,6 +78,7 @@ const Inner = styled.div`
 `;
 
 Inner.propTypes = {
+  disabled: PropTypes.bool.isRequired,
   padding: PropTypes.oneOfType([
     PropTypes.number,
     PropTypes.string,
@@ -88,34 +90,33 @@ Inner.propTypes = {
   ...borderRadius.propTypes,
 };
 
-const GradientButton = ({
-  angle,
-  background: _bg,
-  borderRadius: _borderRadius,
-  borderWidth,
-  children,
-  disabled,
-  gradient,
-  padding,
-  theme,
-  transition,
-  ...props
-}) => (
+const GradientButton = ({ children, ...props }) => (
   <GradientBackground
-    borderRadius={_borderRadius}
-    borderWidth={borderWidth}
-    angle={angle}
-    disabled={disabled}
-    gradient={gradient}
-    theme={theme}
-    {...props}
+    {...filterProps({
+      props,
+      allowedProps: Object.keys(GradientBackground.propTypes),
+      options: {
+        withDOMProps: true,
+        mapProps: {
+          background: ({ value }) => ({ key: 'bg', value }),
+        },
+      },
+    })}
   >
     <Inner
-      bg={_bg}
-      borderRadius={_borderRadius - (borderWidth + 1)}
-      disabled={disabled}
-      padding={padding}
-      transition={transition}
+      {...filterProps({
+        props,
+        allowedProps: Object.keys(Inner.propTypes),
+        options: {
+          mapProps: {
+            background: ({ value }) => ({ key: 'bg', value }),
+            borderRadius: ({ key }) => ({
+              key,
+              value: props.borderRadius - (props.borderWidth + 1),
+            }),
+          },
+        },
+      })}
     >
       {children}
     </Inner>
