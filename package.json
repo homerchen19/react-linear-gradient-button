@@ -21,7 +21,7 @@
     "clean": "rimraf lib",
     "precommit": "lint-staged",
     "deploy:storybook": "storybook-to-ghpages",
-    "lint": "eslint bin src scripts examples",
+    "lint": "eslint src",
     "lint:css": "stylelint './src/**/*.js'",
     "lint:fix": "npm run lint -- --fix",
     "lint:staged": "lint-staged",
