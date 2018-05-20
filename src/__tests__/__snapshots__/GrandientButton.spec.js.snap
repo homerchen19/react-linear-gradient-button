@@ -15,6 +15,7 @@ exports[`GradientButton should render correctly with default style 1`] = `
   cursor: pointer;
   border-radius: 20px;
   color: #ae3560;
+  background-color: #fff;
   font-size: 16px;
   -webkit-text-decoration: none;
   text-decoration: none;
@@ -66,6 +67,7 @@ exports[`GradientButton should render correctly with fancy props 1`] = `
   cursor: pointer;
   border-radius: 10px;
   color: #123456;
+  background-color: #fff;
   font-size: 12px;
   -webkit-text-decoration: none;
   text-decoration: none;
@@ -79,6 +81,7 @@ exports[`GradientButton should render correctly with fancy props 1`] = `
   -webkit-transition: all 0.2s ease-in-out 0s;
   transition: all 0.2s ease-in-out 0s;
   border-radius: 6px;
+  color: #123456;
   background-color: #fff;
 }
 
@@ -95,6 +98,7 @@ exports[`GradientButton should render correctly with fancy props 1`] = `
 >
   <div
     className="c1"
+    color="#123456"
     disabled={false}
   >
     test button

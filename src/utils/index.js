@@ -1,4 +1,5 @@
 import { getGradientColors } from './gradients';
+import filterProps from './filterProps';
 
 const getLinearGradient = (theme, cutomizedGradient) => {
   const [firstColor, ...elseColors] =
@@ -32,4 +33,4 @@ const getPadding = prop => {
   );
 };
 
-export { getLinearGradient, getPadding };
+export { getLinearGradient, getPadding, filterProps };
